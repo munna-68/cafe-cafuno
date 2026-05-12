@@ -1,85 +1,63 @@
 import Navbar from '../components/Navbar'
 import './Menu.css'
 
-const coffees = [
+const roastItems = [
   {
-    name: 'Ethiopian Pour-Over',
-    desc: 'Single-origin Yirgacheffe, floral notes, jasmine & bergamot',
-    price: '$6.50',
+    name: 'Ethiopia Yirgacheffe',
+    desc: 'Floral, Jasmine, Bergamot. Washed process.',
+    badge: 'LIGHT ROAST',
+    price: '$24',
+    img: '/assets/midnight expresso.jpg',
   },
   {
-    name: 'Classic Cappuccino',
-    desc: 'Double espresso, steamed milk, thick velvety microfoam',
-    price: '$5.25',
-  },
-  {
-    name: 'Spanish Latte',
-    desc: 'Espresso, condensed milk, cinnamon-dusted foam',
-    price: '$5.75',
-  },
-  {
-    name: 'Cold Brew Tonic',
-    desc: 'Slow-steeped cold brew, tonic water, lemon wheel',
-    price: '$6.00',
+    name: 'Colombia Supremo',
+    desc: 'Caramel, Red Apple, Cocoa. Natural process.',
+    badge: 'MEDIUM ROAST',
+    price: '$22',
+    img: '/assets/cheese cake.jpg',
   },
 ]
 
-const pastries = [
+const collectives = [
   {
-    name: 'Butter Croissant',
-    desc: 'French-style laminated dough, European butter, golden bake',
-    price: '$4.50',
+    name: 'The Pure Shot',
+    desc: 'Rich Espresso with Thick Crema',
+    img: 'https://images.unsplash.com/photo-1624362776159-9f2281429604?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjJ8&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
-    name: 'Almond Pain au Chocolat',
-    desc: 'Flaky chocolate-filled pastry topped with sliced almonds',
-    price: '$5.25',
+    name: 'The Morning Bloom',
+    desc: 'Premium Cappuccino with Latte Art',
+    img: 'https://images.unsplash.com/photo-1712262583546-8caaeb0e4761?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjJ8&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
-    name: 'Sourdough Morning Bun',
-    desc: 'Cinnamon-orange glaze, house-starter sourdough, flaky layers',
-    price: '$4.75',
+    name: 'The Artisan Flake',
+    desc: 'Flaky Buttery Golden Croissant',
+    img: 'https://images.unsplash.com/photo-1605215199311-e50edb9c78fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjN8&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
-    name: 'New York Cheesecake',
-    desc: 'Silky cream cheese filling, graham cracker crust, berry compote',
-    price: '$7.00',
-  },
-]
-
-const seasonalLeft = [
-  {
-    name: 'Lavender Honey Latte',
-    desc: 'Espresso, house-made lavender syrup, local honey, oat milk',
-    price: '$6.75',
+    name: 'The Creamy Classic',
+    desc: 'New York Cheesecake with Cherry Garnish',
+    img: 'https://images.unsplash.com/photo-1499961161516-49afc271aeed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjR8&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
-    name: 'Maple Pecan Affogato',
-    desc: 'Vanilla gelato, hot espresso shot, candied pecans, maple drizzle',
-    price: '$8.50',
+    name: 'The Golden Chilled Brew',
+    desc: 'Honey Cold Brew with Soft Condensation',
+    img: 'https://images.unsplash.com/photo-1586771787465-56c3a88f2fd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjV8&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
-    name: 'Smoked Salt Caramel Mocha',
-    desc: 'Dark chocolate, smoked sea salt caramel, double espresso',
-    price: '$6.50',
-  },
-]
-
-const seasonalRight = [
-  {
-    name: 'Citrus Matcha Spritz',
-    desc: 'Ceremonial matcha, fresh grapefruit, sparkling water, mint',
-    price: '$7.25',
+    name: 'The Savory Brioche',
+    desc: 'Breakfast Sandwich with Melted Cheese',
+    img: 'https://images.unsplash.com/photo-1661416965611-d88cce80faf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjV8&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
-    name: 'Chai Pomegranate Fizz',
-    desc: 'House chai concentrate, pomegranate reduction, soda float',
-    price: '$5.75',
+    name: 'The Midnight Decadence',
+    desc: 'Dark Chocolate Chunk Cookie',
+    img: 'https://images.unsplash.com/photo-1741732667053-0abb166c66b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjZ8&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
-    name: 'Saffron Cardamom Bouba',
-    desc: 'Steamed milk, saffron threads, freshly ground cardamom, rose',
-    price: '$7.50',
+    name: 'The Garden Sourdough',
+    desc: 'Avocado Toast on Sourdough with Herbs',
+    img: 'https://images.unsplash.com/photo-1558137623-ce933996c730?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjZ8&ixlib=rb-4.1.0&q=80&w=1080',
   },
 ]
 
@@ -88,140 +66,83 @@ export default function Menu() {
     <div className="menu">
       <Navbar />
 
-      {/* Hero */}
-      <section className="menu-hero">
-        <div className="menu-hero__bg">
-          <div className="menu-hero__overlay" />
-          <img src="/assets/hero.jpg" alt="" />
-        </div>
-        <div className="menu-hero__content">
-          <span className="menu-hero__eyebrow">EXPLORE OUR SELECTION</span>
-          <h1 className="menu-hero__title">Artisan Menu</h1>
-          <p className="menu-hero__desc">
-            Single-origin coffees, handcrafted beverages, and artisanal
-            pastries — sourced with intention, prepared with care.
+      {/* Page Header */}
+      <section className="menu-header">
+        <div className="menu-header__inner">
+          <h1 className="menu-header__title">Our Offerings</h1>
+          <p className="menu-header__desc">
+            A curated selection of single-origin beans, precision-brewed beverages, and
+            artisanal pastries. Sourced globally, crafted locally.
           </p>
-          <button className="menu-hero__cta">VIEW FULL MENU</button>
         </div>
       </section>
 
-      {/* Label Row */}
-      <div className="menu-labels">
-        <span className="menu-labels__item">COFFEE</span>
-        <div className="menu-labels__divider" />
-        <span className="menu-labels__item">PASTRIES</span>
-        <div className="menu-labels__divider" />
-        <span className="menu-labels__item">SPECIALS</span>
-        <div className="menu-labels__divider" />
-        <span className="menu-labels__item">SEASONAL</span>
-      </div>
-
-      {/* Zone 1: Coffees */}
-      <section className="menu-zone menu-zone--coffee">
-        <div className="menu-zone__text">
-          <span className="menu-zone__eyebrow">SIGNATURE COFFEES</span>
-          <h2 className="menu-zone__title">
-            Handcrafted<br />Brews
-          </h2>
-          <div className="menu-zone__list">
-            {coffees.map((item, i) => (
-              <div key={i} className="menu-zone__item">
-                <span className="menu-zone__item-name">{item.name}</span>
-                <span className="menu-zone__item-desc">{item.desc}</span>
-                <span className="menu-zone__item-price">{item.price}</span>
-              </div>
-            ))}
-          </div>
+      {/* Section: The Roast Library */}
+      <section className="menu-section">
+        <div className="menu-section__header">
+          <h2 className="menu-section__title">The Roast Library</h2>
+          <span className="menu-section__subtitle">Whole Bean Reserves</span>
+          <div className="menu-section__border" />
         </div>
-        <div className="menu-zone__image">
-          <img src="/assets/midnight expresso.jpg" alt="Coffee" />
+        <div className="menu-grid menu-grid--2col">
+          {roastItems.map((item, i) => (
+            <div key={i} className="menu-card menu-card--roast">
+              <div className="menu-card__img-wrap">
+                <img src={item.img} alt={item.name} />
+              </div>
+              <div className="menu-card__body">
+                <h3 className="menu-card__name">{item.name}</h3>
+                <p className="menu-card__desc">{item.desc}</p>
+                <span className="menu-card__badge">{item.badge}</span>
+              </div>
+              <div className="menu-card__footer">
+                <span className="menu-card__price">{item.price}</span>
+                <button className="menu-card__order">ORDER</button>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Transition 1 */}
-      <div className="menu-transition">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="#7D6B3D">
-          <path d="M8 20c0-2.2 1.8-4 4-4h8c2.2 0 4 1.8 4 4v2c0 2.2-1.8 4-4 4h-8c-2.2 0-4-1.8-4-4v-2z" />
-          <path d="M10 16V8c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2v8" stroke="#7D6B3D" strokeWidth="1.5" fill="none" />
-        </svg>
-      </div>
-
-      {/* Zone 2: Pastries */}
-      <section className="menu-zone menu-zone--pastry">
-        <div className="menu-zone__image">
-          <div className="menu-zone__img-sat" />
-          <img src="/assets/cheese cake.jpg" alt="Pastries" />
+      {/* Section: The Collective */}
+      <section className="menu-section">
+        <div className="menu-section__header">
+          <h2 className="menu-section__title">The Collective</h2>
+          <span className="menu-section__subtitle">Signature Offerings</span>
+          <div className="menu-section__border" />
         </div>
-        <div className="menu-zone__text">
-          <span className="menu-zone__eyebrow">ARTISAN PASTRIES</span>
-          <h2 className="menu-zone__title">
-            Baked Fresh<br />Daily
-          </h2>
-          <div className="menu-zone__list">
-            {pastries.map((item, i) => (
-              <div key={i} className="menu-zone__item">
-                <span className="menu-zone__item-name">{item.name}</span>
-                <span className="menu-zone__item-desc">{item.desc}</span>
-                <span className="menu-zone__item-price">{item.price}</span>
+        <div className="menu-grid menu-grid--4col">
+          {collectives.map((item, i) => (
+            <div key={i} className="menu-card menu-card--collective">
+              <div className="menu-card__img-wrap menu-card__img-wrap--square">
+                <img src={item.img} alt={item.name} />
               </div>
-            ))}
-          </div>
+              <div className="menu-card__body">
+                <h3 className="menu-card__name menu-card__name--sm">{item.name}</h3>
+                <p className="menu-card__desc menu-card__desc--sm">{item.desc}</p>
+              </div>
+              <button className="menu-card__order menu-card__order--sm">ORDER</button>
+            </div>
+          ))}
         </div>
       </section>
-
-      {/* Transition 2 */}
-      <div className="menu-transition">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="#7D6B3D">
-          <path d="M16 4C9.4 4 4 8.3 4 13.5c0 3.5 2.2 6.7 5.5 8.5l-1 4h15l-1-4c3.3-1.8 5.5-5 5.5-8.5C28 8.3 22.6 4 16 4z" />
-          <path d="M12 20c1.5 2 4 3 6 0 2 3 4.5 2 6 0" stroke="#7D6B3D" strokeWidth="1" fill="none" />
-        </svg>
-      </div>
-
-      {/* Zone 3: Seasonal Specials */}
-      <section className="menu-specials">
-        <div className="menu-specials__header">
-          <span className="menu-specials__eyebrow">SEASONAL SPECIALS</span>
-          <h2 className="menu-specials__title">Limited Edition Creations</h2>
-        </div>
-        <div className="menu-specials__columns">
-          <div className="menu-specials__col">
-            {seasonalLeft.map((item, i) => (
-              <div key={i} className="menu-specials__item">
-                <span className="menu-specials__item-name">{item.name}</span>
-                <span className="menu-specials__item-desc">{item.desc}</span>
-                <span className="menu-specials__item-price">{item.price}</span>
-              </div>
-            ))}
-          </div>
-          <div className="menu-specials__col">
-            {seasonalRight.map((item, i) => (
-              <div key={i} className="menu-specials__item">
-                <span className="menu-specials__item-name">{item.name}</span>
-                <span className="menu-specials__item-desc">{item.desc}</span>
-                <span className="menu-specials__item-price">{item.price}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Transition 3 */}
-      <div className="menu-transition">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="#7D6B3D">
-          <path d="M16 28c-2-4-10-6-10-12 0-3.3 2.7-6 6-6 2.2 0 4.2 1.2 5.2 3h-2.4c-.8-1-2-1.5-3.2-1.5-2.2 0-4 1.8-4 4 0 3.5 4.5 5.5 8.4 10.5 3.9-5 8.4-7 8.4-10.5 0-2.2-1.8-4-4-4-1.2 0-2.4.5-3.2 1.5h-2.4c1-1.8 3-3 5.2-3 3.3 0 6 2.7 6 6 0 6-8 8-10 12z" />
-        </svg>
-      </div>
 
       {/* Footer */}
-      <footer className="menu-footer">
-        <span className="menu-footer__brand">CAFUNO</span>
-        <div className="menu-footer__links">
-          <a href="/">HOME</a>
-          <a href="/menu" className="menu-footer__links--active">MENU</a>
-          <a href="#!">LOCATIONS</a>
-          <a href="#!">CONTACT</a>
+      <footer className="menu-page-footer">
+        <div className="menu-page-footer__inner">
+          <div className="menu-page-footer__brand">
+            <span className="menu-page-footer__logo">CAFUNO</span>
+          </div>
+          <div className="menu-page-footer__links">
+            <a href="#!">JOURNAL</a>
+            <a href="#!">WHOLESALE</a>
+            <a href="#!">CAREERS</a>
+            <a href="#!">PRIVACY</a>
+          </div>
+          <span className="menu-page-footer__copy">
+            © 2024 CAFUNO ARTISAN COFFEE. BORN IN MANHATTAN.
+          </span>
         </div>
-        <span className="menu-footer__copy">© 2024 CAFUNO</span>
       </footer>
     </div>
   )
