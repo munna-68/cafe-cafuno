@@ -1,0 +1,342 @@
+/* ===== Menu Hero ===== */
+.menu-hero {
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-hero__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.menu-hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.menu-hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+  max-width: 720px;
+  padding: 0 24px;
+}
+
+.menu-hero__eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 3.5px;
+  color: #f5f2e9;
+}
+
+.menu-hero__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 96px;
+  font-weight: 300;
+  color: #f5f2e9;
+  letter-spacing: -2px;
+  line-height: 1.1;
+}
+
+.menu-hero__desc {
+  font-family: 'Newsreader', serif;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #f5f2e9;
+  opacity: 0.8;
+}
+
+.menu-hero__cta {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: #f5f2e9;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border: 1px solid #f5f2e9;
+  border-radius: 4px;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.menu-hero__cta:hover {
+  background: #f5f2e9;
+  color: #2d2926;
+}
+
+/* ===== Label Row ===== */
+.menu-labels {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 40px;
+  gap: 0;
+}
+
+.menu-labels__item {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: #5e5954;
+  text-transform: uppercase;
+  padding: 0 24px;
+  line-height: 1;
+}
+
+.menu-labels__divider {
+  width: 1px;
+  height: 16px;
+  background: #dcd8cb;
+}
+
+/* ===== Zones ===== */
+.menu-zone {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  padding: 100px 80px;
+}
+
+.menu-zone--coffee {
+  flex-direction: row;
+}
+
+.menu-zone--pastry {
+  flex-direction: row;
+}
+
+.menu-zone__text {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 480px;
+}
+
+.menu-zone__eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: #5e5954;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.menu-zone__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 400;
+  color: #2d2926;
+  letter-spacing: -1px;
+  line-height: 1.15;
+}
+
+.menu-zone__list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.menu-zone__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-zone__item-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: #2d2926;
+  line-height: 1.3;
+}
+
+.menu-zone__item-desc {
+  font-family: 'Newsreader', serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #5e5954;
+  line-height: 1.6;
+}
+
+.menu-zone__item-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #7d6b3d;
+  line-height: 1.4;
+}
+
+.menu-zone__image {
+  width: 480px;
+  height: 600px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.menu-zone__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu-zone__img-sat {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  mix-blend-mode: saturation;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ===== Transitions ===== */
+.menu-transition {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+/* ===== Seasonal Specials ===== */
+.menu-specials {
+  background: #2d2926;
+  padding: 100px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.menu-specials__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-specials__eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: #7d6b3d;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.menu-specials__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 400;
+  color: #f5f2e9;
+  letter-spacing: -1px;
+  line-height: 1.15;
+}
+
+.menu-specials__columns {
+  display: flex;
+  gap: 60px;
+}
+
+.menu-specials__col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  flex: 1;
+}
+
+.menu-specials__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-specials__item-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: #f5f2e9;
+  line-height: 1.3;
+}
+
+.menu-specials__item-desc {
+  font-family: 'Newsreader', serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #dcd8cb;
+  line-height: 1.6;
+}
+
+.menu-specials__item-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #7d6b3d;
+  line-height: 1.4;
+}
+
+/* ===== Menu Footer ===== */
+.menu-footer {
+  background: #f5f2e9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 80px;
+}
+
+.menu-footer__brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: #2d2926;
+  line-height: 1.3;
+}
+
+.menu-footer__links {
+  display: flex;
+  gap: 32px;
+}
+
+.menu-footer__links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #5e5954;
+  text-transform: uppercase;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.menu-footer__links a:hover {
+  color: #2d2926;
+}
+
+.menu-footer__links--active {
+  color: #7d6b3d !important;
+}
+
+.menu-footer__copy {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #5e5954;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
