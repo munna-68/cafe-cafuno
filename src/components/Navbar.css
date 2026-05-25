@@ -20,7 +20,7 @@
 }
 
 .navbar__logo {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 32px;
   font-weight: 400;
   color: #1b1c1c;
@@ -35,7 +35,7 @@
 }
 
 .navbar__link {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1.8px;
@@ -55,7 +55,7 @@
 }
 
 .navbar__cta {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1.8px;
