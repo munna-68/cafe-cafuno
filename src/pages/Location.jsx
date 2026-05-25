@@ -80,7 +80,10 @@ export default function Location() {
           </div>
         </header>
 
-        <section className="location-shell location-list" aria-label="Cafuno boutiques">
+        <section
+          className="location-shell location-list"
+          aria-label="Cafuno boutiques"
+        >
           {locations.map((location) => (
             <article
               key={location.name}
@@ -106,7 +109,9 @@ export default function Location() {
                   <SteamIcon />
                 </div>
 
-                <p className="location-card__quote">&quot;{location.quote}&quot;</p>
+                <p className="location-card__quote">
+                  &quot;{location.quote}&quot;
+                </p>
 
                 <div className="location-card__details">
                   <div className="location-card__detail">
@@ -147,9 +152,12 @@ export default function Location() {
 
         <section className="location-shell location-narrative">
           <div className="location-narrative__panel">
-            <span className="location-narrative__label">Neighborhood Narrative</span>
+            <span className="location-narrative__label">
+              Neighborhood Narrative
+            </span>
             <p className="location-narrative__title">
-              Finding quietude in the heart of the city&apos;s constant movement.
+              Finding quietude in the heart of the city&apos;s constant
+              movement.
             </p>
           </div>
         </section>

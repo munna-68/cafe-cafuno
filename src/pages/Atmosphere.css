@@ -1,0 +1,428 @@
+.atmosphere-page {
+  position: relative;
+  background: linear-gradient(180deg, #fcf9f8 0%, #fdfaf9 24%, #fcf9f8 100%);
+  color: #1b1c1c;
+  min-height: 100vh;
+}
+
+.atmosphere-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.026;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.atmosphere-page__main,
+.atmosphere-footer {
+  position: relative;
+  z-index: 2;
+}
+
+.atmosphere-shell {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-inline: 40px;
+}
+
+.atmosphere-page__main {
+  padding-top: 104px;
+}
+
+.atmosphere-hero {
+  padding-top: 0;
+  margin-bottom: 160px;
+}
+
+.atmosphere-hero__media {
+  position: relative;
+  overflow: hidden;
+  height: clamp(520px, 82vh, 960px);
+  background: #111111;
+}
+
+.atmosphere-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.atmosphere-hero__media:hover img {
+  transform: scale(1.02);
+}
+
+.atmosphere-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(17, 17, 17, 0.12) 0%,
+    rgba(17, 17, 17, 0.3) 46%,
+    rgba(17, 17, 17, 0.74) 100%
+  );
+}
+
+.atmosphere-hero__content {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  max-width: 760px;
+  padding: 0 48px 48px;
+}
+
+.atmosphere-hero__title {
+  max-width: 640px;
+  margin-bottom: 18px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(48px, 7vw, 84px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #fcf9f8;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.32);
+}
+
+.atmosphere-hero__desc {
+  max-width: 530px;
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: rgba(252, 249, 248, 0.92);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+}
+
+.atmosphere-section {
+  margin-bottom: 160px;
+}
+
+.atmosphere-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  align-items: center;
+}
+
+.atmosphere-grid--chapter-1 .atmosphere-card--text {
+  grid-column: 1 / span 4;
+}
+
+.atmosphere-grid--chapter-1 .atmosphere-media {
+  grid-column: 6 / span 7;
+}
+
+.atmosphere-grid--chapter-2 .atmosphere-media {
+  grid-column: 1 / span 7;
+}
+
+.atmosphere-grid--chapter-2 .atmosphere-card--content {
+  grid-column: 9 / span 4;
+}
+
+.atmosphere-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.atmosphere-card--text {
+  justify-self: start;
+  max-width: 360px;
+  padding: 48px 48px 40px;
+  background: rgba(252, 249, 248, 0.9);
+  border: 1px solid rgba(123, 119, 110, 0.14);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);
+}
+
+.atmosphere-card--content {
+  max-width: 420px;
+}
+
+.atmosphere-card__eyebrow {
+  margin-bottom: 20px;
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(73, 70, 63, 0.72);
+}
+
+.atmosphere-card__title {
+  margin-bottom: 22px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #1b1c1c;
+}
+
+.atmosphere-card__body {
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(73, 70, 63, 0.88);
+}
+
+.atmosphere-card__body--tight {
+  max-width: 420px;
+}
+
+.atmosphere-card__quote {
+  margin-top: 28px;
+  padding-left: 24px;
+  border-left: 1px solid rgba(203, 198, 188, 0.9);
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+  color: rgba(73, 70, 63, 0.8);
+}
+
+.atmosphere-card__quote span {
+  display: block;
+  margin-bottom: 2px;
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  line-height: 1;
+  color: rgba(97, 94, 87, 0.48);
+}
+
+.atmosphere-card__divider {
+  width: 100%;
+  height: 1px;
+  margin: 28px 0 24px;
+  background: rgba(203, 198, 188, 0.9);
+}
+
+.atmosphere-media {
+  overflow: hidden;
+  background: #e4e2e1;
+}
+
+.atmosphere-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.atmosphere-media:hover img {
+  transform: scale(1.03);
+}
+
+.atmosphere-media--tall {
+  aspect-ratio: 1 / 1.1;
+}
+
+.atmosphere-media--wide {
+  aspect-ratio: 1 / 1.02;
+}
+
+.atmosphere-features {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.atmosphere-feature {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.atmosphere-feature__icon {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(97, 94, 87, 0.9);
+}
+
+.atmosphere-feature__icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.atmosphere-feature__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.atmosphere-feature__label {
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(73, 70, 63, 0.72);
+}
+
+.atmosphere-feature__desc {
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(73, 70, 63, 0.88);
+}
+
+.atmosphere-footer {
+  background: linear-gradient(180deg, #f0eded 0%, #efebea 100%);
+  border-top: 1px solid rgba(123, 119, 110, 0.16);
+}
+
+.atmosphere-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 48px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.atmosphere-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.atmosphere-footer__logo {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(28px, 3vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+}
+
+.atmosphere-footer__copy {
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(73, 70, 63, 0.54);
+}
+
+.atmosphere-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 32px;
+}
+
+.atmosphere-footer__links a {
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(73, 70, 63, 0.72);
+  transition: color 0.2s;
+}
+
+.atmosphere-footer__links a:hover {
+  color: #1b1c1c;
+}
+
+@media (max-width: 1100px) {
+  .atmosphere-grid--chapter-1 .atmosphere-card--text,
+  .atmosphere-grid--chapter-1 .atmosphere-media,
+  .atmosphere-grid--chapter-2 .atmosphere-media,
+  .atmosphere-grid--chapter-2 .atmosphere-card--content {
+    grid-column: 1 / -1;
+  }
+
+  .atmosphere-grid {
+    row-gap: 28px;
+  }
+
+  .atmosphere-grid--chapter-1 .atmosphere-media {
+    order: 2;
+  }
+
+  .atmosphere-grid--chapter-1 .atmosphere-card--text {
+    order: 1;
+    max-width: 560px;
+  }
+
+  .atmosphere-grid--chapter-2 .atmosphere-media {
+    order: 2;
+  }
+
+  .atmosphere-grid--chapter-2 .atmosphere-card--content {
+    order: 1;
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 720px) {
+  .atmosphere-shell {
+    padding-inline: 20px;
+  }
+
+  .atmosphere-page__main {
+    padding-top: 96px;
+  }
+
+  .atmosphere-hero {
+    margin-bottom: 80px;
+  }
+
+  .atmosphere-hero__media {
+    height: 68vh;
+    min-height: 480px;
+  }
+
+  .atmosphere-hero__content {
+    padding: 0 20px 24px;
+  }
+
+  .atmosphere-hero__desc {
+    font-size: 16px;
+  }
+
+  .atmosphere-section {
+    margin-bottom: 80px;
+  }
+
+  .atmosphere-card--text {
+    padding: 32px 24px;
+  }
+
+  .atmosphere-card__body,
+  .atmosphere-feature__desc,
+  .atmosphere-card__quote {
+    font-size: 14px;
+  }
+
+  .atmosphere-card__divider {
+    margin-top: 24px;
+  }
+
+  .atmosphere-footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .atmosphere-footer__links {
+    justify-content: flex-start;
+    gap: 20px 24px;
+  }
+}
