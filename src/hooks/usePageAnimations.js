@@ -124,9 +124,12 @@ export function usePageAnimations(dependencies = []) {
       const scrollTexts = Array.from(
         document.querySelectorAll(
           "h2, h3, h4, p, .bento__item-title, .atmosphere__title, .menu-card__name, .menu-card__desc",
-        )
+        ),
       ).filter(
-        (el) => !(el.closest(".hero, [class$='-header']") || el.closest(".anim-line"))
+        (el) =>
+          !(
+            el.closest(".hero, [class$='-header']") || el.closest(".anim-line")
+          ),
       );
 
       ScrollTrigger.batch(scrollTexts, {
@@ -145,7 +148,7 @@ export function usePageAnimations(dependencies = []) {
 
       // 2c. Scroll-triggered image reveal
       const containers = Array.from(
-        document.querySelectorAll(".image-reveal-container")
+        document.querySelectorAll(".image-reveal-container"),
       );
 
       ScrollTrigger.batch(containers, {

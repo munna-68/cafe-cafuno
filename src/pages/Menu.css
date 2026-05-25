@@ -22,7 +22,7 @@
 }
 
 .menu-header__title {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 84px;
   font-weight: 400;
   color: #1b1c1c;
@@ -32,7 +32,7 @@
 }
 
 .menu-header__desc {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 300;
   color: #49463f;
@@ -59,7 +59,7 @@
 }
 
 .menu-section__title {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 48px;
   font-weight: 400;
   color: #1b1c1c;
@@ -68,7 +68,7 @@
 }
 
 .menu-section__subtitle {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: #49463f;
@@ -150,7 +150,7 @@
 }
 
 .menu-card__name {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 32px;
   font-weight: 400;
   color: #1b1c1c;
@@ -164,7 +164,7 @@
 }
 
 .menu-card__desc {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: #49463f;
@@ -177,7 +177,7 @@
 }
 
 .menu-card__badge {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1.8px;
@@ -199,7 +199,7 @@
 }
 
 .menu-card__price {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 20px;
   font-weight: 400;
   color: #1b1c1c;
@@ -208,7 +208,7 @@
 }
 
 .menu-card__order {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1.8px;
@@ -247,7 +247,7 @@
 }
 
 .menu-page-footer__logo {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 32px;
   font-weight: 400;
   color: #1b1c1c;
@@ -260,7 +260,7 @@
 }
 
 .menu-page-footer__links a {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1.8px;
@@ -275,7 +275,7 @@
 }
 
 .menu-page-footer__copy {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: #49463f;
@@ -370,7 +370,7 @@
 }
 
 .menu-modal__title {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 48px;
   font-weight: 400;
   color: #1b1c1c;
@@ -378,7 +378,7 @@
 }
 
 .menu-modal__desc {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 300;
   color: #49463f;
@@ -386,7 +386,7 @@
 }
 
 .menu-modal__price {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 24px;
   font-weight: 400;
   color: #1b1c1c;
