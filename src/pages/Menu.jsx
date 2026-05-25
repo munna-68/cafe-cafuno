@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import "./Menu.css";
 
@@ -71,6 +72,8 @@ const collectives = [
 ];
 
 export default function Menu() {
+  const [selectedItem, setSelectedItem] = useState(null);
+
   return (
     <div className="menu">
       <Navbar />
@@ -107,7 +110,12 @@ export default function Menu() {
               </div>
               <div className="menu-card__footer">
                 <span className="menu-card__price">{item.price}</span>
-                <button className="menu-card__order">ORDER</button>
+                <button 
+                  className="menu-card__order"
+                  onClick={() => setSelectedItem(item)}
+                >
+                  DETAILS
+                </button>
               </div>
             </div>
           ))}
@@ -135,8 +143,11 @@ export default function Menu() {
                   {item.desc}
                 </p>
               </div>
-              <button className="menu-card__order menu-card__order--sm">
-                ORDER
+              <button 
+                className="menu-card__order menu-card__order--sm"
+                onClick={() => setSelectedItem(item)}
+              >
+                DETAILS
               </button>
             </div>
           ))}
@@ -160,6 +171,29 @@ export default function Menu() {
           </span>
         </div>
       </footer>
+
+      {/* Item Modal Popup */}
+      {selectedItem && (
+        <div className="menu-modal">
+          <div className="menu-modal__backdrop" onClick={() => setSelectedItem(null)} />
+          <div className="menu-modal__content">
+            <button className="menu-modal__close" onClick={() => setSelectedItem(null)}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            <div className="menu-modal__img">
+              <img src={selectedItem.img} alt={selectedItem.name} />
+            </div>
+            <div className="menu-modal__info">
+              {selectedItem.badge && <span className="menu-card__badge">{selectedItem.badge}</span>}
+              <h2 className="menu-modal__title">{selectedItem.name}</h2>
+              <p className="menu-modal__desc">{selectedItem.desc}</p>
+              {selectedItem.price && <span className="menu-modal__price">{selectedItem.price}</span>}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

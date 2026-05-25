@@ -8,8 +8,8 @@ import {
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 
-import CinematicTransition from "./components/CinematicTransition";
 import RouteTransition from "./components/RouteTransition";
+import Preloader from "./components/Preloader";
 import "./components/RouteTransition.css";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
@@ -28,14 +28,7 @@ import {
   preloadImages,
   scheduleIdleTask,
 } from "./lib/preloadImages";
-
-const GRID_ROWS = 6;
-const GRID_COLS = 6;
-const GRID_STAGGER = {
-  grid: [GRID_ROWS, GRID_COLS],
-  from: "start",
-  amount: 0.45,
-};
+import { usePageAnimations } from "./hooks/usePageAnimations";
 
 const SHELL_REVEAL_DURATION = 0.34;
 
@@ -48,9 +41,7 @@ export default function App() {
   const navigate = useNavigate();
 
   const shellRef = useRef(null);
-  const transitionRef = useRef(null);
   const routeTransitionRef = useRef(null);
-  const bootTimelineRef = useRef(null);
   const idlePrefetchRef = useRef(null);
   const pendingRouteRef = useRef(null);
   const activeRouteRef = useRef(
@@ -62,12 +53,6 @@ export default function App() {
   const transitionBusyRef = useRef(false);
   const reducedMotionRef = useRef(false);
   const shellReadyRef = useRef(false);
-
-  const getBlocks = useCallback(
-    () =>
-      transitionRef.current?.querySelectorAll("[data-transition-block]") ?? [],
-    [],
-  );
 
   const revealShell = useCallback((onComplete) => {
     const shell = shellRef.current;
@@ -224,96 +209,45 @@ export default function App() {
         return;
       }
 
-      const overlay = transitionRef.current;
       const shell = shellRef.current;
-      const blocks = getBlocks();
 
-      if (!overlay || !shell) {
-        bootReadyRef.current = true;
-        setShellReady(true);
-        setTransitionState({
-          active: false,
-          mode: "idle",
-          copy: bootCopy,
-        });
-        return;
-      }
-
-      bootTimelineRef.current?.kill();
-      gsap.set(overlay, { autoAlpha: 1, display: "" });
-      gsap.set(blocks, { scale: 1.02, transformOrigin: "center center" });
-      gsap.set(shell, {
-        y: 24,
-        scale: 1.02,
-        filter: "blur(12px)",
+      bootReadyRef.current = true;
+      setShellReady(true);
+      setTransitionState({
+        active: false,
+        mode: "idle",
+        copy: bootCopy,
       });
-
-      bootTimelineRef.current = gsap.timeline({
-        defaults: {
-          ease: reducedMotionRef.current ? "none" : "power4.inOut",
-        },
-        onComplete: () => {
-          if (cancelled) {
-            return;
-          }
-
-          gsap.set(overlay, { display: "none" });
-          bootReadyRef.current = true;
-          activeRouteRef.current = getRoutePathKey(
-            initialPathnameRef.current,
-            initialSearchRef.current,
-          );
-          setShellReady(true);
-
-          if (idlePrefetchRef.current != null) {
-            cancelIdleTask(idlePrefetchRef.current);
-          }
-
-          idlePrefetchRef.current = scheduleIdleTask(() => {
-            preloadImages(getIdleAssets(initialPathnameRef.current));
-          });
-
-          revealShell(() => {
-            if (cancelled) {
-              return;
-            }
-
-            completeTransition();
-            bootTimelineRef.current = null;
-          });
-        },
-      });
-
-      bootTimelineRef.current
-        .to(
-          blocks,
-          {
-            scale: 0,
-            duration: reducedMotionRef.current ? 0.18 : 0.8,
-            stagger: GRID_STAGGER,
-            transformOrigin: "center center",
-          },
-          0,
-        )
-        .to(
-          overlay,
-          {
-            autoAlpha: 0,
-            duration: reducedMotionRef.current ? 0.08 : 0.28,
-          },
-          reducedMotionRef.current ? 0.58 : 0.88,
-        );
-    });
-
-    return () => {
-      cancelled = true;
-      bootTimelineRef.current?.kill();
 
       if (idlePrefetchRef.current != null) {
         cancelIdleTask(idlePrefetchRef.current);
       }
+      idlePrefetchRef.current = scheduleIdleTask(() => {
+        preloadImages(getIdleAssets(initialPathnameRef.current));
+      });
+
+      if (shell) {
+        gsap.to(shell, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: "blur(0px)",
+          duration: reducedMotionRef.current ? 0.16 : SHELL_REVEAL_DURATION,
+          ease: "power2.out",
+          onComplete: () => {
+            completeTransition();
+          },
+        });
+      }
+    });
+
+    return () => {
+      cancelled = true;
+      if (idlePrefetchRef.current != null) {
+        cancelIdleTask(idlePrefetchRef.current);
+      }
     };
-  }, [completeTransition, getBlocks, revealShell]);
+  }, [completeTransition, revealShell]);
 
   useLayoutEffect(() => {
     const nextRouteKey = getRoutePathKey(location.pathname, location.search);
@@ -479,8 +413,21 @@ export default function App() {
     return () => window.cancelAnimationFrame(frame);
   }, [location.pathname, location.search, location.hash]);
 
+  usePageAnimations([shellReady]);
+
+  const [showPreloader, setShowPreloader] = useState(true);
+
   return (
     <>
+      {showPreloader && (
+        <Preloader
+          onComplete={() => {
+            setShowPreloader(false);
+            window.isPreloaderComplete = true;
+            window.dispatchEvent(new Event("preloaderComplete"));
+          }}
+        />
+      )}
       <div
         id="site-shell"
         ref={shellRef}
@@ -496,17 +443,7 @@ export default function App() {
         </Routes>
       </div>
 
-      <CinematicTransition
-        ref={transitionRef}
-        active={transitionState.active}
-        mode={transitionState.mode}
-        copy={transitionState.copy}
-      />
-
-      <RouteTransition
-        ref={routeTransitionRef}
-        reducedMotion={reducedMotion}
-      />
+      <RouteTransition ref={routeTransitionRef} reducedMotion={reducedMotion} />
     </>
   );
 }

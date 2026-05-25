@@ -12,7 +12,7 @@
 }
 
 .hero__title {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 84px;
   font-weight: 400;
   color: #1b1c1c;
@@ -29,7 +29,7 @@
 }
 
 .hero__desc p {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 300;
   color: #49463f;
@@ -87,7 +87,7 @@
 }
 
 .story__label {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1.8px;
@@ -96,7 +96,7 @@
 }
 
 .story__title {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 48px;
   font-weight: 400;
   color: #1b1c1c;
@@ -112,7 +112,7 @@
 }
 
 .story__text {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: #1b1c1c;
@@ -121,7 +121,7 @@
 }
 
 .story__cta {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1.8px;
@@ -160,7 +160,7 @@
 }
 
 .bento__heading {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 48px;
   font-weight: 400;
   color: #1b1c1c;
@@ -168,7 +168,7 @@
 }
 
 .bento__season {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1.8px;
@@ -206,7 +206,7 @@
 }
 
 .bento__item-title {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 32px;
   font-weight: 400;
   color: #1b1c1c;
@@ -214,7 +214,7 @@
 }
 
 .bento__item-desc {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: #49463f;
@@ -242,7 +242,7 @@
 }
 
 .bento__tag {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1.8px;
@@ -263,7 +263,7 @@
 }
 
 .bento__item-name {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 24px;
   font-weight: 500;
   color: #1b1c1c;
@@ -279,10 +279,15 @@
   align-items: center;
   padding: 48px;
   text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.bento__item--cta:hover {
+  background-color: #2a2c2c;
 }
 
 .bento__cta-text {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 32px;
   font-weight: 400;
   color: #fcf9f8;
@@ -291,6 +296,11 @@
 
 .bento__cta-icon {
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.bento__item--cta:hover .bento__cta-icon {
+  transform: translateX(8px);
 }
 
 /* ===== Atmosphere ===== */
@@ -336,7 +346,7 @@
 }
 
 .atmosphere__title {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 32px;
   font-weight: 400;
   color: #1b1c1c;
@@ -344,7 +354,7 @@
 }
 
 .atmosphere__desc {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #49463f;
@@ -389,7 +399,7 @@
 }
 
 .home-footer__logo {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 32px;
   font-weight: 400;
   color: #1b1c1c;
@@ -398,7 +408,7 @@
 }
 
 .home-footer__copy {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
   color: rgba(73, 70, 63, 0.49);
@@ -412,7 +422,7 @@
 }
 
 .home-footer__links a {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1.8px;
