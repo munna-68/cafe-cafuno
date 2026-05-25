@@ -178,7 +178,7 @@ export default function App() {
       });
 
       gsap.set(shell, {
-        opacity: 0,
+        opacity: 1,
         y: 24,
         scale: 1.02,
         filter: "blur(12px)",
@@ -189,6 +189,7 @@ export default function App() {
           ease: reducedMotionRef.current ? "none" : "power4.out",
         },
         onComplete: () => {
+          gsap.set(overlay, { display: "none" });
           revealShell(completeTransition);
         },
       });
@@ -257,7 +258,7 @@ export default function App() {
       }
 
       routeTimelineRef.current?.kill();
-      gsap.set(overlay, { autoAlpha: 1 });
+      gsap.set(overlay, { autoAlpha: 1, display: "" });
       gsap.set(blocks, { scale: 0, transformOrigin: "center center" });
       gsap.set(shell, {
         scale: 1,
@@ -338,10 +339,9 @@ export default function App() {
       }
 
       bootTimelineRef.current?.kill();
-      gsap.set(overlay, { autoAlpha: 1 });
+      gsap.set(overlay, { autoAlpha: 1, display: "" });
       gsap.set(blocks, { scale: 1.02, transformOrigin: "center center" });
       gsap.set(shell, {
-        opacity: 0,
         y: 24,
         scale: 1.02,
         filter: "blur(12px)",
@@ -356,6 +356,7 @@ export default function App() {
             return;
           }
 
+          gsap.set(overlay, { display: "none" });
           bootReadyRef.current = true;
           activeRouteRef.current = getRoutePathKey(
             initialPathnameRef.current,
@@ -448,12 +449,12 @@ export default function App() {
 
     if (overlay && shell) {
       gsap.killTweensOf([overlay, shell, blocks]);
-      gsap.set(overlay, { autoAlpha: 1 });
+      gsap.set(overlay, { autoAlpha: 1, display: "" });
       gsap.set(blocks, { scale: 1.02, transformOrigin: "center center" });
       gsap.set(shell, {
+        opacity: 1,
         scale: 1.02,
         y: 24,
-        opacity: 0,
         filter: "blur(12px)",
       });
     }

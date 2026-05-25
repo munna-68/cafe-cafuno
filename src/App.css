@@ -41,7 +41,6 @@ body.cafuno-is-transitioning {
 }
 
 .site-shell[data-ready="false"] {
-  opacity: 0;
 }
 
 .transition-layer {
@@ -50,7 +49,6 @@ body.cafuno-is-transitioning {
   z-index: 999;
   display: grid;
   grid-template-areas: "stack";
-  background: #060505;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -76,7 +74,6 @@ body.cafuno-is-transitioning {
   grid-template-columns: repeat(6, minmax(0, 1fr));
   grid-template-rows: repeat(6, minmax(0, 1fr));
   gap: 0;
-  background: #060505;
 }
 
 .transition-layer__block {
