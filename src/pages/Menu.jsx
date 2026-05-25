@@ -1,65 +1,74 @@
-import Navbar from '../components/Navbar'
-import './Menu.css'
+import Navbar from "../components/Navbar";
+import "./Menu.css";
+
+import pureShot from "../assets/the-pure-shot.jpeg";
+import morningBloom from "../assets/the-morning-bloom.jpeg";
+import artisanFlake from "../assets/the-artisan-flake.jpeg";
+import creamyClassic from "../assets/the-creamy-classic.jpeg";
+import goldenChilledBrew from "../assets/the-golden-chilled-brew.jpeg";
+import savoryBrioche from "../assets/the-savory-brioche.jpeg";
+import midnightDecadence from "../assets/midnight-decadence.jpeg";
+import gardenSourdough from "../assets/the-garden-sourdough.jpeg";
 
 const roastItems = [
   {
-    name: 'Ethiopia Yirgacheffe',
-    desc: 'Floral, Jasmine, Bergamot. Washed process.',
-    badge: 'LIGHT ROAST',
-    price: '$24',
-    img: '/assets/midnight expresso.jpg',
+    name: "Ethiopia Yirgacheffe",
+    desc: "Floral, Jasmine, Bergamot. Washed process.",
+    badge: "LIGHT ROAST",
+    price: "$24",
+    img: pureShot,
   },
   {
-    name: 'Colombia Supremo',
-    desc: 'Caramel, Red Apple, Cocoa. Natural process.',
-    badge: 'MEDIUM ROAST',
-    price: '$22',
-    img: '/assets/cheese cake.jpg',
+    name: "Colombia Supremo",
+    desc: "Caramel, Red Apple, Cocoa. Natural process.",
+    badge: "MEDIUM ROAST",
+    price: "$22",
+    img: creamyClassic,
   },
-]
+];
 
 const collectives = [
   {
-    name: 'The Pure Shot',
-    desc: 'Rich Espresso with Thick Crema',
-    img: 'https://images.unsplash.com/photo-1624362776159-9f2281429604?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjJ8&ixlib=rb-4.1.0&q=80&w=1080',
+    name: "The Pure Shot",
+    desc: "Rich Espresso with Thick Crema",
+    img: pureShot,
   },
   {
-    name: 'The Morning Bloom',
-    desc: 'Premium Cappuccino with Latte Art',
-    img: 'https://images.unsplash.com/photo-1712262583546-8caaeb0e4761?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjJ8&ixlib=rb-4.1.0&q=80&w=1080',
+    name: "The Morning Bloom",
+    desc: "Premium Cappuccino with Latte Art",
+    img: morningBloom,
   },
   {
-    name: 'The Artisan Flake',
-    desc: 'Flaky Buttery Golden Croissant',
-    img: 'https://images.unsplash.com/photo-1605215199311-e50edb9c78fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjN8&ixlib=rb-4.1.0&q=80&w=1080',
+    name: "The Artisan Flake",
+    desc: "Flaky Buttery Golden Croissant",
+    img: artisanFlake,
   },
   {
-    name: 'The Creamy Classic',
-    desc: 'New York Cheesecake with Cherry Garnish',
-    img: 'https://images.unsplash.com/photo-1499961161516-49afc271aeed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjR8&ixlib=rb-4.1.0&q=80&w=1080',
+    name: "The Creamy Classic",
+    desc: "New York Cheesecake with Cherry Garnish",
+    img: creamyClassic,
   },
   {
-    name: 'The Golden Chilled Brew',
-    desc: 'Honey Cold Brew with Soft Condensation',
-    img: 'https://images.unsplash.com/photo-1586771787465-56c3a88f2fd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjV8&ixlib=rb-4.1.0&q=80&w=1080',
+    name: "The Golden Chilled Brew",
+    desc: "Honey Cold Brew with Soft Condensation",
+    img: goldenChilledBrew,
   },
   {
-    name: 'The Savory Brioche',
-    desc: 'Breakfast Sandwich with Melted Cheese',
-    img: 'https://images.unsplash.com/photo-1661416965611-d88cce80faf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjV8&ixlib=rb-4.1.0&q=80&w=1080',
+    name: "The Savory Brioche",
+    desc: "Breakfast Sandwich with Melted Cheese",
+    img: savoryBrioche,
   },
   {
-    name: 'The Midnight Decadence',
-    desc: 'Dark Chocolate Chunk Cookie',
-    img: 'https://images.unsplash.com/photo-1741732667053-0abb166c66b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjZ8&ixlib=rb-4.1.0&q=80&w=1080',
+    name: "The Midnight Decadence",
+    desc: "Dark Chocolate Chunk Cookie",
+    img: midnightDecadence,
   },
   {
-    name: 'The Garden Sourdough',
-    desc: 'Avocado Toast on Sourdough with Herbs',
-    img: 'https://images.unsplash.com/photo-1558137623-ce933996c730?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2MTEzMjZ8&ixlib=rb-4.1.0&q=80&w=1080',
+    name: "The Garden Sourdough",
+    desc: "Avocado Toast on Sourdough with Herbs",
+    img: gardenSourdough,
   },
-]
+];
 
 export default function Menu() {
   return (
@@ -71,8 +80,9 @@ export default function Menu() {
         <div className="menu-header__inner">
           <h1 className="menu-header__title">Our Offerings</h1>
           <p className="menu-header__desc">
-            A curated selection of single-origin beans, precision-brewed beverages, and
-            artisanal pastries. Sourced globally, crafted locally.
+            A curated selection of single-origin beans, precision-brewed
+            beverages, and artisanal pastries. Sourced globally, crafted
+            locally.
           </p>
         </div>
       </section>
@@ -118,10 +128,16 @@ export default function Menu() {
                 <img src={item.img} alt={item.name} />
               </div>
               <div className="menu-card__body">
-                <h3 className="menu-card__name menu-card__name--sm">{item.name}</h3>
-                <p className="menu-card__desc menu-card__desc--sm">{item.desc}</p>
+                <h3 className="menu-card__name menu-card__name--sm">
+                  {item.name}
+                </h3>
+                <p className="menu-card__desc menu-card__desc--sm">
+                  {item.desc}
+                </p>
               </div>
-              <button className="menu-card__order menu-card__order--sm">ORDER</button>
+              <button className="menu-card__order menu-card__order--sm">
+                ORDER
+              </button>
             </div>
           ))}
         </div>
@@ -145,5 +161,5 @@ export default function Menu() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
