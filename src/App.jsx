@@ -1,31 +1,37 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import gsap from 'gsap';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import gsap from "gsap";
 
-import CinematicTransition from './components/CinematicTransition';
-import Home from './pages/Home';
-import Menu from './pages/Menu';
-import Reserve from './pages/Reserve';
-import Location from './pages/Location';
-import Atmosphere from './pages/Atmosphere';
+import CinematicTransition from "./components/CinematicTransition";
+import Home from "./pages/Home";
+import Menu from "./pages/Menu";
+import Reserve from "./pages/Reserve";
+import Location from "./pages/Location";
+import Atmosphere from "./pages/Atmosphere";
 import {
   getBootAssets,
   getIdleAssets,
   getRouteCopy,
   getRouteKey,
   getRouteMotion,
-} from './lib/siteMotion';
+} from "./lib/siteMotion";
 import {
   cancelIdleTask,
   preloadImages,
   scheduleIdleTask,
-} from './lib/preloadImages';
+} from "./lib/preloadImages";
 
 const GRID_ROWS = 6;
 const GRID_COLS = 6;
 const GRID_STAGGER = {
   grid: [GRID_ROWS, GRID_COLS],
-  from: 'start',
+  from: "start",
   amount: 0.45,
 };
 
@@ -56,7 +62,8 @@ export default function App() {
   const shellReadyRef = useRef(false);
 
   const getBlocks = useCallback(
-    () => transitionRef.current?.querySelectorAll('[data-transition-block]') ?? [],
+    () =>
+      transitionRef.current?.querySelectorAll("[data-transition-block]") ?? [],
     [],
   );
 
@@ -64,7 +71,7 @@ export default function App() {
     const shell = shellRef.current;
 
     if (!shell) {
-      if (typeof onComplete === 'function') {
+      if (typeof onComplete === "function") {
         onComplete();
       }
 
@@ -75,9 +82,9 @@ export default function App() {
       opacity: 1,
       y: 0,
       scale: 1,
-      filter: 'blur(0px)',
+      filter: "blur(0px)",
       duration: reducedMotionRef.current ? 0.16 : SHELL_REVEAL_DURATION,
-      ease: 'power2.out',
+      ease: "power2.out",
       onComplete,
     });
   }, []);
@@ -85,7 +92,7 @@ export default function App() {
   const [shellReady, setShellReady] = useState(false);
   const [transitionState, setTransitionState] = useState({
     active: true,
-    mode: 'boot',
+    mode: "boot",
     copy: getRouteCopy(location.pathname),
   });
 
@@ -94,7 +101,7 @@ export default function App() {
   }, [shellReady]);
 
   useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const updatePreference = () => {
       reducedMotionRef.current = media.matches;
@@ -102,10 +109,10 @@ export default function App() {
 
     updatePreference();
 
-    if (typeof media.addEventListener === 'function') {
-      media.addEventListener('change', updatePreference);
+    if (typeof media.addEventListener === "function") {
+      media.addEventListener("change", updatePreference);
 
-      return () => media.removeEventListener('change', updatePreference);
+      return () => media.removeEventListener("change", updatePreference);
     }
 
     media.addListener(updatePreference);
@@ -115,7 +122,7 @@ export default function App() {
 
   useEffect(() => {
     const previousScrollRestoration = window.history.scrollRestoration;
-    window.history.scrollRestoration = 'manual';
+    window.history.scrollRestoration = "manual";
 
     return () => {
       window.history.scrollRestoration = previousScrollRestoration;
@@ -123,17 +130,18 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    document.body.classList.toggle('cafuno-is-booting', !shellReady);
+    document.body.classList.toggle("cafuno-is-booting", !shellReady);
     document.body.classList.toggle(
-      'cafuno-is-transitioning',
+      "cafuno-is-transitioning",
       shellReady && transitionState.active,
     );
-    document.body.style.overflow = shellReady && !transitionState.active ? '' : 'hidden';
+    document.body.style.overflow =
+      shellReady && !transitionState.active ? "" : "hidden";
 
     return () => {
-      document.body.classList.remove('cafuno-is-booting');
-      document.body.classList.remove('cafuno-is-transitioning');
-      document.body.style.overflow = '';
+      document.body.classList.remove("cafuno-is-booting");
+      document.body.classList.remove("cafuno-is-transitioning");
+      document.body.style.overflow = "";
     };
   }, [shellReady, transitionState.active]);
 
@@ -141,11 +149,11 @@ export default function App() {
     transitionBusyRef.current = false;
     pendingRouteRef.current = null;
     routeTimelineRef.current = null;
-    document.body.classList.remove('cafuno-is-transitioning');
+    document.body.classList.remove("cafuno-is-transitioning");
     setTransitionState((current) => ({
       ...current,
       active: false,
-      mode: 'idle',
+      mode: "idle",
     }));
   }, []);
 
@@ -165,7 +173,7 @@ export default function App() {
       routeTimelineRef.current?.kill();
       setTransitionState({
         active: true,
-        mode: 'route',
+        mode: "route",
         copy: nextCopy,
       });
 
@@ -173,12 +181,12 @@ export default function App() {
         opacity: 0,
         y: 24,
         scale: 1.02,
-        filter: 'blur(12px)',
+        filter: "blur(12px)",
       });
 
       routeTimelineRef.current = gsap.timeline({
         defaults: {
-          ease: reducedMotionRef.current ? 'none' : 'power4.out',
+          ease: reducedMotionRef.current ? "none" : "power4.out",
         },
         onComplete: () => {
           revealShell(completeTransition);
@@ -192,7 +200,7 @@ export default function App() {
             scale: 0,
             duration: reducedMotionRef.current ? 0.16 : 0.74,
             stagger: GRID_STAGGER,
-            transformOrigin: 'center center',
+            transformOrigin: "center center",
           },
           0,
         )
@@ -210,85 +218,88 @@ export default function App() {
 
   const playCoverAndNavigate = useCallback(
     (targetHref) => {
-    if (!shellReadyRef.current || transitionBusyRef.current) {
-      return;
-    }
+      if (!shellReadyRef.current || transitionBusyRef.current) {
+        return;
+      }
 
-    const targetUrl = new URL(targetHref, window.location.href);
-    const targetPathKey = getRoutePathKey(targetUrl.pathname, targetUrl.search);
+      const targetUrl = new URL(targetHref, window.location.href);
+      const targetPathKey = getRoutePathKey(
+        targetUrl.pathname,
+        targetUrl.search,
+      );
 
-    if (targetPathKey === activeRouteRef.current && !targetUrl.hash) {
-      return;
-    }
+      if (targetPathKey === activeRouteRef.current && !targetUrl.hash) {
+        return;
+      }
 
-    transitionBusyRef.current = true;
-    pendingRouteRef.current = targetPathKey;
-    setTransitionState({
-      active: true,
-      mode: 'route',
-      copy: getRouteCopy(targetUrl.pathname),
-    });
-
-    const overlay = transitionRef.current;
-    const shell = shellRef.current;
-    const blocks = getBlocks();
-
-    if (!overlay || !shell) {
-      transitionBusyRef.current = false;
-      pendingRouteRef.current = null;
+      transitionBusyRef.current = true;
+      pendingRouteRef.current = targetPathKey;
       setTransitionState({
-        active: false,
-        mode: 'idle',
+        active: true,
+        mode: "route",
         copy: getRouteCopy(targetUrl.pathname),
       });
-      navigate(`${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`);
-      return;
-    }
 
-    routeTimelineRef.current?.kill();
-    gsap.set(overlay, { autoAlpha: 1 });
-    gsap.set(blocks, { scale: 0, transformOrigin: 'center center' });
-    gsap.set(shell, {
-      scale: 1,
-      y: 0,
-      opacity: 0,
-      filter: 'blur(0px)',
-    });
+      const overlay = transitionRef.current;
+      const shell = shellRef.current;
+      const blocks = getBlocks();
 
-    const routeAssets = getRouteMotion(targetUrl.pathname).assets;
-    preloadImages(routeAssets);
-
-    routeTimelineRef.current = gsap.timeline({
-      defaults: {
-        ease: reducedMotionRef.current ? 'none' : 'power4.inOut',
-      },
-      onComplete: () => {
+      if (!overlay || !shell) {
+        transitionBusyRef.current = false;
+        pendingRouteRef.current = null;
+        setTransitionState({
+          active: false,
+          mode: "idle",
+          copy: getRouteCopy(targetUrl.pathname),
+        });
         navigate(`${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`);
-      },
-    });
+        return;
+      }
 
-    routeTimelineRef.current
-      .to(
-        blocks,
-        {
-          scale: 1.02,
-          duration: reducedMotionRef.current ? 0.16 : 0.62,
-          stagger: GRID_STAGGER,
-          transformOrigin: 'center center',
+      routeTimelineRef.current?.kill();
+      gsap.set(overlay, { autoAlpha: 1 });
+      gsap.set(blocks, { scale: 0, transformOrigin: "center center" });
+      gsap.set(shell, {
+        scale: 1,
+        y: 0,
+        opacity: 0,
+        filter: "blur(0px)",
+      });
+
+      const routeAssets = getRouteMotion(targetUrl.pathname).assets;
+      preloadImages(routeAssets);
+
+      routeTimelineRef.current = gsap.timeline({
+        defaults: {
+          ease: reducedMotionRef.current ? "none" : "power4.inOut",
         },
-        0,
-      )
-      .to(
-        shell,
-        {
-          scale: 0.995,
-          y: 10,
-          opacity: 0,
-          filter: 'blur(6px)',
-          duration: reducedMotionRef.current ? 0.16 : 0.28,
+        onComplete: () => {
+          navigate(`${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`);
         },
-        0,
-      );
+      });
+
+      routeTimelineRef.current
+        .to(
+          blocks,
+          {
+            scale: 1.02,
+            duration: reducedMotionRef.current ? 0.16 : 0.62,
+            stagger: GRID_STAGGER,
+            transformOrigin: "center center",
+          },
+          0,
+        )
+        .to(
+          shell,
+          {
+            scale: 0.995,
+            y: 10,
+            opacity: 0,
+            filter: "blur(6px)",
+            duration: reducedMotionRef.current ? 0.16 : 0.28,
+          },
+          0,
+        );
     },
     [getBlocks, navigate],
   );
@@ -320,7 +331,7 @@ export default function App() {
         setShellReady(true);
         setTransitionState({
           active: false,
-          mode: 'idle',
+          mode: "idle",
           copy: bootCopy,
         });
         return;
@@ -328,17 +339,17 @@ export default function App() {
 
       bootTimelineRef.current?.kill();
       gsap.set(overlay, { autoAlpha: 1 });
-      gsap.set(blocks, { scale: 1.02, transformOrigin: 'center center' });
+      gsap.set(blocks, { scale: 1.02, transformOrigin: "center center" });
       gsap.set(shell, {
         opacity: 0,
         y: 24,
         scale: 1.02,
-        filter: 'blur(12px)',
+        filter: "blur(12px)",
       });
 
       bootTimelineRef.current = gsap.timeline({
         defaults: {
-          ease: reducedMotionRef.current ? 'none' : 'power4.inOut',
+          ease: reducedMotionRef.current ? "none" : "power4.inOut",
         },
         onComplete: () => {
           if (cancelled) {
@@ -378,7 +389,7 @@ export default function App() {
             scale: 0,
             duration: reducedMotionRef.current ? 0.18 : 0.8,
             stagger: GRID_STAGGER,
-            transformOrigin: 'center center',
+            transformOrigin: "center center",
           },
           0,
         )
@@ -430,7 +441,7 @@ export default function App() {
 
     setTransitionState({
       active: true,
-      mode: 'route',
+      mode: "route",
       copy: nextCopy,
     });
     transitionBusyRef.current = true;
@@ -438,12 +449,12 @@ export default function App() {
     if (overlay && shell) {
       gsap.killTweensOf([overlay, shell, blocks]);
       gsap.set(overlay, { autoAlpha: 1 });
-      gsap.set(blocks, { scale: 1.02, transformOrigin: 'center center' });
+      gsap.set(blocks, { scale: 1.02, transformOrigin: "center center" });
       gsap.set(shell, {
         scale: 1.02,
         y: 24,
         opacity: 0,
-        filter: 'blur(12px)',
+        filter: "blur(12px)",
       });
     }
 
@@ -477,13 +488,17 @@ export default function App() {
         return;
       }
 
-      const anchor = target.closest('a');
+      const anchor = target.closest("a");
       if (!anchor) {
         return;
       }
 
-      const href = anchor.getAttribute('href');
-      if (!href || anchor.hasAttribute('download') || anchor.target === '_blank') {
+      const href = anchor.getAttribute("href");
+      if (
+        !href ||
+        anchor.hasAttribute("download") ||
+        anchor.target === "_blank"
+      ) {
         return;
       }
 
@@ -511,7 +526,9 @@ export default function App() {
       }
 
       event.preventDefault();
-      playCoverAndNavigate(`${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`);
+      playCoverAndNavigate(
+        `${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`,
+      );
     };
 
     const handlePrefetch = (event) => {
@@ -521,12 +538,12 @@ export default function App() {
         return;
       }
 
-      const anchor = target.closest('a');
+      const anchor = target.closest("a");
       if (!anchor) {
         return;
       }
 
-      const href = anchor.getAttribute('href');
+      const href = anchor.getAttribute("href");
       if (!href) {
         return;
       }
@@ -548,20 +565,20 @@ export default function App() {
       preloadImages(getRouteMotion(targetUrl.pathname).assets);
     };
 
-    document.addEventListener('click', handleClick, true);
-    document.addEventListener('mouseover', handlePrefetch, true);
-    document.addEventListener('focusin', handlePrefetch, true);
+    document.addEventListener("click", handleClick, true);
+    document.addEventListener("mouseover", handlePrefetch, true);
+    document.addEventListener("focusin", handlePrefetch, true);
 
     return () => {
-      document.removeEventListener('click', handleClick, true);
-      document.removeEventListener('mouseover', handlePrefetch, true);
-      document.removeEventListener('focusin', handlePrefetch, true);
+      document.removeEventListener("click", handleClick, true);
+      document.removeEventListener("mouseover", handlePrefetch, true);
+      document.removeEventListener("focusin", handlePrefetch, true);
     };
   }, [playCoverAndNavigate]);
 
   useEffect(() => {
     if (!location.hash) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
       return undefined;
     }
 
@@ -569,7 +586,7 @@ export default function App() {
       const target = document.querySelector(location.hash);
 
       if (target instanceof Element) {
-        target.scrollIntoView({ behavior: 'auto', block: 'start' });
+        target.scrollIntoView({ behavior: "auto", block: "start" });
       }
     });
 
@@ -582,7 +599,7 @@ export default function App() {
         id="site-shell"
         ref={shellRef}
         className="site-shell"
-        data-ready={shellReady ? 'true' : 'false'}
+        data-ready={shellReady ? "true" : "false"}
       >
         <Routes>
           <Route path="/" element={<Home />} />

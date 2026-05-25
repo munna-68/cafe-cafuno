@@ -22,15 +22,15 @@ export function preloadImage(src) {
       resolve({ src, status });
     };
 
-    image.decoding = 'async';
-    image.onload = () => finish('loaded');
-    image.onerror = () => finish('error');
+    image.decoding = "async";
+    image.onload = () => finish("loaded");
+    image.onerror = () => finish("error");
     image.src = src;
 
-    if (typeof image.decode === 'function') {
+    if (typeof image.decode === "function") {
       image
         .decode()
-        .then(() => finish('decoded'))
+        .then(() => finish("decoded"))
         .catch(() => {
           // onload / onerror will resolve the promise.
         });
@@ -46,11 +46,11 @@ export function preloadImages(urls = []) {
 }
 
 export function scheduleIdleTask(callback) {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return null;
   }
 
-  if (typeof window.requestIdleCallback === 'function') {
+  if (typeof window.requestIdleCallback === "function") {
     return window.requestIdleCallback(() => callback(), { timeout: 1500 });
   }
 
@@ -58,11 +58,11 @@ export function scheduleIdleTask(callback) {
 }
 
 export function cancelIdleTask(handle) {
-  if (typeof window === 'undefined' || handle == null) {
+  if (typeof window === "undefined" || handle == null) {
     return;
   }
 
-  if (typeof window.cancelIdleCallback === 'function') {
+  if (typeof window.cancelIdleCallback === "function") {
     window.cancelIdleCallback(handle);
     return;
   }

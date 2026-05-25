@@ -1,18 +1,18 @@
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
 const BLOCK_COUNT = 36;
 
 const blocks = Array.from({ length: BLOCK_COUNT }, (_, index) => index);
 
 const CinematicTransition = forwardRef(function CinematicTransition(
-  { active = false, mode = 'idle', copy },
+  { active = false, mode = "idle", copy },
   ref,
 ) {
   return (
     <aside
       ref={ref}
       className={`transition-layer transition-layer--${mode} ${
-        active ? 'is-active' : 'is-idle'
+        active ? "is-active" : "is-idle"
       }`}
       aria-hidden="true"
     >
