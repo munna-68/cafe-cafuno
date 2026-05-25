@@ -185,47 +185,53 @@ export default function Menu() {
       </footer>
 
       {/* Item Modal Popup */}
-      {selectedItem && createPortal(
-        <div className="menu-modal">
-          <div
-            className="menu-modal__backdrop"
-            onClick={() => setSelectedItem(null)}
-          />
-          <div className="menu-modal__content">
-            <button
-              className="menu-modal__close"
+      {selectedItem &&
+        createPortal(
+          <div className="menu-modal">
+            <div
+              className="menu-modal__backdrop"
               onClick={() => setSelectedItem(null)}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M18 6L6 18M6 6l12 12"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            <div className="menu-modal__img">
-              <img src={selectedItem.img} alt={selectedItem.name} />
+            />
+            <div className="menu-modal__content">
+              <button
+                className="menu-modal__close"
+                onClick={() => setSelectedItem(null)}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M18 6L6 18M6 6l12 12"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+              <div className="menu-modal__img">
+                <img src={selectedItem.img} alt={selectedItem.name} />
+              </div>
+              <div className="menu-modal__info">
+                {selectedItem.badge && (
+                  <span className="menu-card__badge">{selectedItem.badge}</span>
+                )}
+                <h2 className="menu-modal__title">{selectedItem.name}</h2>
+                <p className="menu-modal__subdesc">{selectedItem.desc}</p>
+                <p className="menu-modal__desc">
+                  Crafted with precision and care, this item goes through a
+                  rigorous process of selection and preparation. We use only the
+                  finest globally sourced ingredients to bring out the subtle
+                  notes and robust core flavors that make it uniquely Cafuno.
+                </p>
+                {selectedItem.price && (
+                  <span className="menu-modal__price">
+                    {selectedItem.price}
+                  </span>
+                )}
+              </div>
             </div>
-            <div className="menu-modal__info">
-              {selectedItem.badge && (
-                <span className="menu-card__badge">{selectedItem.badge}</span>
-              )}
-              <h2 className="menu-modal__title">{selectedItem.name}</h2>
-              <p className="menu-modal__subdesc">{selectedItem.desc}</p>
-              <p className="menu-modal__desc">
-                Crafted with precision and care, this item goes through a rigorous process of selection and preparation. We use only the finest globally sourced ingredients to bring out the subtle notes and robust core flavors that make it uniquely Cafuno.
-              </p>
-              {selectedItem.price && (
-                <span className="menu-modal__price">{selectedItem.price}</span>
-              )}
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }
