@@ -9,6 +9,8 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 
 import CinematicTransition from "./components/CinematicTransition";
+import RouteTransition from "./components/RouteTransition";
+import "./components/RouteTransition.css";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Reserve from "./pages/Reserve";
@@ -47,8 +49,8 @@ export default function App() {
 
   const shellRef = useRef(null);
   const transitionRef = useRef(null);
+  const routeTransitionRef = useRef(null);
   const bootTimelineRef = useRef(null);
-  const routeTimelineRef = useRef(null);
   const idlePrefetchRef = useRef(null);
   const pendingRouteRef = useRef(null);
   const activeRouteRef = useRef(
@@ -90,6 +92,8 @@ export default function App() {
   }, []);
 
   const [shellReady, setShellReady] = useState(false);
+  const [routeBusy, setRouteBusy] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const [transitionState, setTransitionState] = useState({
     active: true,
     mode: "boot",
@@ -105,6 +109,7 @@ export default function App() {
 
     const updatePreference = () => {
       reducedMotionRef.current = media.matches;
+      setReducedMotion(media.matches);
     };
 
     updatePreference();
@@ -130,25 +135,21 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const isTransitioning = routeBusy || (shellReady && transitionState.active);
     document.body.classList.toggle("cafuno-is-booting", !shellReady);
-    document.body.classList.toggle(
-      "cafuno-is-transitioning",
-      shellReady && transitionState.active,
-    );
-    document.body.style.overflow =
-      shellReady && !transitionState.active ? "" : "hidden";
+    document.body.classList.toggle("cafuno-is-transitioning", isTransitioning);
+    document.body.style.overflow = isTransitioning ? "hidden" : "";
 
     return () => {
       document.body.classList.remove("cafuno-is-booting");
       document.body.classList.remove("cafuno-is-transitioning");
       document.body.style.overflow = "";
     };
-  }, [shellReady, transitionState.active]);
+  }, [shellReady, transitionState.active, routeBusy]);
 
   const completeTransition = useCallback(() => {
     transitionBusyRef.current = false;
     pendingRouteRef.current = null;
-    routeTimelineRef.current = null;
     document.body.classList.remove("cafuno-is-transitioning");
     setTransitionState((current) => ({
       ...current,
@@ -157,67 +158,14 @@ export default function App() {
     }));
   }, []);
 
-  const playReveal = useCallback(
-    (nextCopy) => {
-      transitionBusyRef.current = true;
+  const completeRouteTransition = useCallback(() => {
+    transitionBusyRef.current = false;
+    pendingRouteRef.current = null;
+    setRouteBusy(false);
+    document.body.classList.remove("cafuno-is-transitioning");
+  }, []);
 
-      const overlay = transitionRef.current;
-      const shell = shellRef.current;
-      const blocks = getBlocks();
-
-      if (!overlay || !shell) {
-        completeTransition();
-        return;
-      }
-
-      routeTimelineRef.current?.kill();
-      setTransitionState({
-        active: true,
-        mode: "route",
-        copy: nextCopy,
-      });
-
-      gsap.set(shell, {
-        opacity: 1,
-        y: 24,
-        scale: 1.02,
-        filter: "blur(12px)",
-      });
-
-      routeTimelineRef.current = gsap.timeline({
-        defaults: {
-          ease: reducedMotionRef.current ? "none" : "power4.out",
-        },
-        onComplete: () => {
-          gsap.set(overlay, { display: "none" });
-          revealShell(completeTransition);
-        },
-      });
-
-      routeTimelineRef.current
-        .to(
-          blocks,
-          {
-            scale: 0,
-            duration: reducedMotionRef.current ? 0.16 : 0.74,
-            stagger: GRID_STAGGER,
-            transformOrigin: "center center",
-          },
-          0,
-        )
-        .to(
-          overlay,
-          {
-            autoAlpha: 0,
-            duration: reducedMotionRef.current ? 0.08 : 0.28,
-          },
-          reducedMotionRef.current ? 0.58 : 0.88,
-        );
-    },
-    [completeTransition, getBlocks, revealShell],
-  );
-
-  const playCoverAndNavigate = useCallback(
+  const navigateWithTransition = useCallback(
     (targetHref) => {
       if (!shellReadyRef.current || transitionBusyRef.current) {
         return;
@@ -235,74 +183,27 @@ export default function App() {
 
       transitionBusyRef.current = true;
       pendingRouteRef.current = targetPathKey;
-      setTransitionState({
-        active: true,
-        mode: "route",
-        copy: getRouteCopy(targetUrl.pathname),
-      });
+      setRouteBusy(true);
 
-      const overlay = transitionRef.current;
-      const shell = shellRef.current;
-      const blocks = getBlocks();
+      const rt = routeTransitionRef.current;
 
-      if (!overlay || !shell) {
+      if (!rt) {
         transitionBusyRef.current = false;
         pendingRouteRef.current = null;
-        setTransitionState({
-          active: false,
-          mode: "idle",
-          copy: getRouteCopy(targetUrl.pathname),
-        });
+        setRouteBusy(false);
         navigate(`${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`);
         return;
       }
 
-      routeTimelineRef.current?.kill();
-      gsap.set(overlay, { autoAlpha: 1, display: "" });
-      gsap.set(blocks, { scale: 0, transformOrigin: "center center" });
-      gsap.set(shell, {
-        scale: 1,
-        y: 0,
-        opacity: 0,
-        filter: "blur(0px)",
-      });
+      preloadImages(getRouteMotion(targetUrl.pathname).assets);
 
-      const routeAssets = getRouteMotion(targetUrl.pathname).assets;
-      preloadImages(routeAssets);
-
-      routeTimelineRef.current = gsap.timeline({
-        defaults: {
-          ease: reducedMotionRef.current ? "none" : "power4.inOut",
-        },
+      rt.cover({
         onComplete: () => {
           navigate(`${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`);
         },
       });
-
-      routeTimelineRef.current
-        .to(
-          blocks,
-          {
-            scale: 1.02,
-            duration: reducedMotionRef.current ? 0.16 : 0.62,
-            stagger: GRID_STAGGER,
-            transformOrigin: "center center",
-          },
-          0,
-        )
-        .to(
-          shell,
-          {
-            scale: 0.995,
-            y: 10,
-            opacity: 0,
-            filter: "blur(6px)",
-            duration: reducedMotionRef.current ? 0.16 : 0.28,
-          },
-          0,
-        );
     },
-    [getBlocks, navigate],
+    [navigate],
   );
 
   useEffect(() => {
@@ -407,7 +308,6 @@ export default function App() {
     return () => {
       cancelled = true;
       bootTimelineRef.current?.kill();
-      routeTimelineRef.current?.kill();
 
       if (idlePrefetchRef.current != null) {
         cancelIdleTask(idlePrefetchRef.current);
@@ -427,41 +327,26 @@ export default function App() {
       return;
     }
 
-    const nextCopy = getRouteCopy(location.pathname);
-
     if (pendingRouteRef.current === nextRouteKey) {
       pendingRouteRef.current = null;
       activeRouteRef.current = nextRouteKey;
-      playReveal(nextCopy);
+
+      const rt = routeTransitionRef.current;
+      if (rt) {
+        setRouteBusy(true);
+        rt.reveal({
+          onComplete: () => {
+            completeRouteTransition();
+          },
+        });
+      } else {
+        completeRouteTransition();
+      }
       return;
     }
 
-    const overlay = transitionRef.current;
-    const shell = shellRef.current;
-    const blocks = getBlocks();
-
-    setTransitionState({
-      active: true,
-      mode: "route",
-      copy: nextCopy,
-    });
-    transitionBusyRef.current = true;
-
-    if (overlay && shell) {
-      gsap.killTweensOf([overlay, shell, blocks]);
-      gsap.set(overlay, { autoAlpha: 1, display: "" });
-      gsap.set(blocks, { scale: 1.02, transformOrigin: "center center" });
-      gsap.set(shell, {
-        opacity: 1,
-        scale: 1.02,
-        y: 24,
-        filter: "blur(12px)",
-      });
-    }
-
     activeRouteRef.current = nextRouteKey;
-    playReveal(nextCopy);
-  }, [getBlocks, location.pathname, location.search, playReveal]);
+  }, [location.pathname, location.search, completeRouteTransition]);
 
   useEffect(() => {
     const handleClick = (event) => {
@@ -527,7 +412,7 @@ export default function App() {
       }
 
       event.preventDefault();
-      playCoverAndNavigate(
+      navigateWithTransition(
         `${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`,
       );
     };
@@ -575,7 +460,7 @@ export default function App() {
       document.removeEventListener("mouseover", handlePrefetch, true);
       document.removeEventListener("focusin", handlePrefetch, true);
     };
-  }, [playCoverAndNavigate]);
+  }, [navigateWithTransition]);
 
   useEffect(() => {
     if (!location.hash) {
@@ -616,6 +501,11 @@ export default function App() {
         active={transitionState.active}
         mode={transitionState.mode}
         copy={transitionState.copy}
+      />
+
+      <RouteTransition
+        ref={routeTransitionRef}
+        reducedMotion={reducedMotion}
       />
     </>
   );
