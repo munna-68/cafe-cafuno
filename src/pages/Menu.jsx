@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
+import gsap from "gsap";
 import Navbar from "../components/Navbar";
 import "./Menu.css";
 
@@ -75,15 +76,63 @@ const collectives = [
 export default function Menu() {
   const [selectedItem, setSelectedItem] = useState(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (selectedItem) {
       document.body.style.overflow = "hidden";
+
+      const ctx = gsap.context(() => {
+        // Animate the image reveal similar to the homepage
+        gsap.fromTo(
+          ".menu-modal__img img",
+          { yPercent: 20, scale: 1.1 },
+          { yPercent: 0, scale: 1, duration: 1.2, ease: "power3.out" },
+        );
+
+        gsap.fromTo(
+          ".menu-modal__img",
+          { clipPath: "inset(100% 0% 0% 0%)" },
+          {
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 1.2,
+            ease: "power4.inOut",
+          },
+        );
+
+        // Stagger the text items inside
+        gsap.fromTo(
+          ".modal-anim-item",
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power3.out",
+            delay: 0.2,
+          },
+        );
+
+        // Fade in backdrop and close button
+        gsap.fromTo(
+          ".menu-modal__backdrop",
+          { opacity: 0 },
+          { opacity: 1, duration: 0.6 },
+        );
+
+        gsap.fromTo(
+          ".menu-modal__close",
+          { opacity: 0 },
+          { opacity: 1, duration: 0.6, delay: 0.8 },
+        );
+      });
+
+      return () => {
+        document.body.style.overflow = "";
+        ctx.revert();
+      };
     } else {
       document.body.style.overflow = "";
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
   }, [selectedItem]);
 
   return (
@@ -212,18 +261,24 @@ export default function Menu() {
               </div>
               <div className="menu-modal__info">
                 {selectedItem.badge && (
-                  <span className="menu-card__badge">{selectedItem.badge}</span>
+                  <span className="menu-card__badge modal-anim-item">
+                    {selectedItem.badge}
+                  </span>
                 )}
-                <h2 className="menu-modal__title">{selectedItem.name}</h2>
-                <p className="menu-modal__subdesc">{selectedItem.desc}</p>
-                <p className="menu-modal__desc">
+                <h2 className="menu-modal__title modal-anim-item">
+                  {selectedItem.name}
+                </h2>
+                <p className="menu-modal__subdesc modal-anim-item">
+                  {selectedItem.desc}
+                </p>
+                <p className="menu-modal__desc modal-anim-item">
                   Crafted with precision and care, this item goes through a
                   rigorous process of selection and preparation. We use only the
                   finest globally sourced ingredients to bring out the subtle
                   notes and robust core flavors that make it uniquely Cafuno.
                 </p>
                 {selectedItem.price && (
-                  <span className="menu-modal__price">
+                  <span className="menu-modal__price modal-anim-item">
                     {selectedItem.price}
                   </span>
                 )}

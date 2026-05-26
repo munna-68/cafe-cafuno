@@ -142,7 +142,7 @@
 .bento {
   background: #f0eded;
   margin-top: 160px;
-  padding: 60px 0 320px;
+  padding: 60px 0 160px;
 }
 
 .bento__inner {
@@ -322,7 +322,7 @@
 /* ===== Atmosphere ===== */
 .atmosphere {
   max-width: 1200px;
-  margin: 160px auto 320px;
+  margin: 160px auto 160px;
 }
 
 .atmosphere__inner {
