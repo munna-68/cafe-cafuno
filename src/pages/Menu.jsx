@@ -1,7 +1,6 @@
 import { useState, useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
 import gsap from "gsap";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./Menu.css";
 
@@ -138,8 +137,6 @@ export default function Menu() {
 
   return (
     <div className="menu">
-      <Navbar />
-
       {/* Page Header */}
       <section className="menu-header">
         <div className="menu-header__inner">

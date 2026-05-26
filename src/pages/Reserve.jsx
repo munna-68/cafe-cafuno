@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react'
-import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import './Reserve.css'
 
@@ -155,7 +154,6 @@ export default function Reserve() {
   if (submitted) {
     return (
       <div className="reserve">
-        <Navbar />
         <section className="reserve__main">
           <div className="reserve__title-area">
             <h1 className="reserve__title">Reserve a Moment</h1>
@@ -213,7 +211,6 @@ export default function Reserve() {
 
   return (
     <div className="reserve">
-      <Navbar />
       <section className="reserve__main">
         <div className="reserve__title-area">
           <h1 className="reserve__title">Reserve a Moment</h1>

@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./Location.css";
 
@@ -68,8 +67,6 @@ const locations = [
 export default function Location() {
   return (
     <div className="location-page">
-      <Navbar />
-
       <main className="location-page__main">
         <header className="location-hero location-shell">
           <div className="location-hero__content">

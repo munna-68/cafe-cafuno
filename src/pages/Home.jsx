@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./Home.css";
 
@@ -13,8 +12,6 @@ import atmosphere2Img from "../assets/atmosphare 2.jpg";
 export default function Home() {
   return (
     <div className="home">
-      <Navbar />
-
       {/* Hero Section */}
       <section className="hero" id="hero">
         <div className="hero__top">

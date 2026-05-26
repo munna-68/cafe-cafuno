@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./Atmosphere.css";
 
@@ -29,8 +28,6 @@ function EqualizerIcon() {
 export default function Atmosphere() {
   return (
     <div className="atmosphere-page">
-      <Navbar />
-
       <main className="atmosphere-page__main">
         <section className="atmosphere-hero atmosphere-shell">
           <div className="atmosphere-hero__media">

@@ -8,6 +8,7 @@ import {
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 
+import Navbar from "./components/Navbar";
 import RouteTransition from "./components/RouteTransition";
 import Preloader from "./components/Preloader";
 import "./components/RouteTransition.css";
@@ -425,6 +426,7 @@ export default function App() {
           }}
         />
       )}
+      <Navbar />
       <div
         id="site-shell"
         ref={shellRef}
