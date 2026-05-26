@@ -48,7 +48,6 @@ export default function App() {
     getRoutePathKey(location.pathname, location.search),
   );
   const initialPathnameRef = useRef(location.pathname);
-  const initialSearchRef = useRef(location.search);
   const bootReadyRef = useRef(false);
   const transitionBusyRef = useRef(false);
   const reducedMotionRef = useRef(false);

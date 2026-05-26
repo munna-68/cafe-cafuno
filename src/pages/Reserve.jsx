@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import './Reserve.css'
 
 const BOUTIQUES = [
@@ -205,22 +206,7 @@ export default function Reserve() {
             </div>
           </div>
         </section>
-        <footer className="reserve-footer">
-          <div className="reserve-footer__inner">
-            <div className="reserve-footer__brand">
-              <span className="reserve-footer__logo">CAFUNO</span>
-              <span className="reserve-footer__copy">
-                &copy; 2024 CAFUNO ARTISAN COFFEE. BORN IN MANHATTAN.
-              </span>
-            </div>
-            <div className="reserve-footer__links">
-              <a href="/">JOURNAL</a>
-              <a href="/">WHOLESALE</a>
-              <a href="/">CAREERS</a>
-              <a href="/">PRIVACY</a>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     )
   }
@@ -417,22 +403,7 @@ export default function Reserve() {
         </div>
       </section>
 
-      <footer className="reserve-footer">
-        <div className="reserve-footer__inner">
-          <div className="reserve-footer__brand">
-            <span className="reserve-footer__logo">CAFUNO</span>
-            <span className="reserve-footer__copy">
-              &copy; 2024 CAFUNO ARTISAN COFFEE. BORN IN MANHATTAN.
-            </span>
-          </div>
-          <div className="reserve-footer__links">
-            <a href="/">JOURNAL</a>
-            <a href="/">WHOLESALE</a>
-            <a href="/">CAREERS</a>
-            <a href="/">PRIVACY</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./Location.css";
 
 import heroImg from "../assets/hero.jpg";
@@ -163,56 +164,7 @@ export default function Location() {
         </section>
       </main>
 
-      <footer className="location-footer">
-        <div className="location-shell location-footer__inner">
-          <div className="location-footer__brand">
-            <span className="location-footer__logo">CAFUNO</span>
-            <p className="location-footer__copy">
-              Artisan roasters dedicated to the sensory journey of the bean and
-              the architecture of the ritual.
-            </p>
-          </div>
-
-          <div className="location-footer__links">
-            <div className="location-footer__column">
-              <span className="location-footer__label">Journal</span>
-              <a href="#!">Wholesale</a>
-              <a href="#!">Careers</a>
-              <a href="#!">Origins</a>
-            </div>
-
-            <div className="location-footer__column">
-              <span className="location-footer__label">Connect</span>
-              <a href="#!">Instagram</a>
-              <a href="#!">Newsletter</a>
-              <a href="#!">Press</a>
-            </div>
-
-            <div className="location-footer__updates">
-              <span className="location-footer__label">Updates</span>
-              <label className="location-footer__field" htmlFor="email-updates">
-                <span className="sr-only">Email address</span>
-                <input
-                  id="email-updates"
-                  type="email"
-                  placeholder="YOUR EMAIL"
-                />
-                <button type="button" aria-label="Subscribe to updates">
-                  <ArrowIcon />
-                </button>
-              </label>
-            </div>
-          </div>
-
-          <div className="location-footer__meta">
-            <span>© 2024 CAFUNO ARTISAN ROASTERS. ALL RIGHTS RESERVED.</span>
-            <div>
-              <a href="#!">PRIVACY</a>
-              <a href="#!">ACCESSIBILITY</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

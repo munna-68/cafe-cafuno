@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./Atmosphere.css";
 
 import heroImg from "../assets/atmosphare 2.jpg";
@@ -131,23 +132,7 @@ export default function Atmosphere() {
         </section>
       </main>
 
-      <footer className="atmosphere-footer">
-        <div className="atmosphere-shell atmosphere-footer__inner">
-          <div className="atmosphere-footer__brand">
-            <span className="atmosphere-footer__logo">CAFUNO</span>
-            <p className="atmosphere-footer__copy">
-              © 2024 CAFUNO ARTISAN COFFEE. BORN IN MANHATTAN.
-            </p>
-          </div>
-
-          <div className="atmosphere-footer__links">
-            <a href="#!">JOURNAL</a>
-            <a href="#!">WHOLESALE</a>
-            <a href="#!">CAREERS</a>
-            <a href="#!">PRIVACY</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

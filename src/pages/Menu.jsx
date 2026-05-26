@@ -1,7 +1,8 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
 import gsap from "gsap";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./Menu.css";
 
 import pureShot from "../assets/the-pure-shot.jpeg";
@@ -216,22 +217,7 @@ export default function Menu() {
       </section>
 
       {/* Footer */}
-      <footer className="menu-page-footer">
-        <div className="menu-page-footer__inner">
-          <div className="menu-page-footer__brand">
-            <span className="menu-page-footer__logo">CAFUNO</span>
-          </div>
-          <div className="menu-page-footer__links">
-            <a href="#!">JOURNAL</a>
-            <a href="#!">WHOLESALE</a>
-            <a href="#!">CAREERS</a>
-            <a href="#!">PRIVACY</a>
-          </div>
-          <span className="menu-page-footer__copy">
-            © 2024 CAFUNO ARTISAN COFFEE. BORN IN MANHATTAN.
-          </span>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Item Modal Popup */}
       {selectedItem &&

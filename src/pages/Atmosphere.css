@@ -15,8 +15,7 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.atmosphere-page__main,
-.atmosphere-footer {
+.atmosphere-page__main {
   position: relative;
   z-index: 2;
 }
@@ -281,63 +280,7 @@
   color: rgba(73, 70, 63, 0.88);
 }
 
-.atmosphere-footer {
-  background: linear-gradient(180deg, #f0eded 0%, #efebea 100%);
-  border-top: 1px solid rgba(123, 119, 110, 0.16);
-}
 
-.atmosphere-footer__inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 48px;
-  padding-top: 80px;
-  padding-bottom: 80px;
-}
-
-.atmosphere-footer__brand {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.atmosphere-footer__logo {
-  font-family: "Playfair Display", serif;
-  font-size: clamp(28px, 3vw, 32px);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: -0.05em;
-}
-
-.atmosphere-footer__copy {
-  font-family: "Manrope", sans-serif;
-  font-size: 12px;
-  line-height: 1.6;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(73, 70, 63, 0.54);
-}
-
-.atmosphere-footer__links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 32px;
-}
-
-.atmosphere-footer__links a {
-  font-family: "Manrope", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(73, 70, 63, 0.72);
-  transition: color 0.2s;
-}
-
-.atmosphere-footer__links a:hover {
-  color: #1b1c1c;
-}
 
 @media (max-width: 1100px) {
   .atmosphere-grid--chapter-1 .atmosphere-card--text,
@@ -414,15 +357,5 @@
     margin-top: 24px;
   }
 
-  .atmosphere-footer__inner {
-    flex-direction: column;
-    align-items: flex-start;
-    padding-top: 64px;
-    padding-bottom: 64px;
-  }
 
-  .atmosphere-footer__links {
-    justify-content: flex-start;
-    gap: 20px 24px;
-  }
 }
