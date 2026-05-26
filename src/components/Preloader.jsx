@@ -6,6 +6,11 @@ export default function Preloader({ onComplete }) {
   const containerRef = useRef(null);
   const typeTextRef = useRef(null);
   const initialLoaderRef = useRef(null);
+  const onCompleteRef = useRef(onComplete);
+
+  useLayoutEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useLayoutEffect(() => {
     // Lock scrolling while preloader is active
@@ -55,10 +60,10 @@ export default function Preloader({ onComplete }) {
     });
 
     const initialLoadTimeline = gsap.timeline({
-      delay: 1.5,
+      delay: 1.0,
       onComplete: () => {
         setMounted(false);
-        if (onComplete) onComplete();
+        if (onCompleteRef.current) onCompleteRef.current();
       },
     });
 
@@ -81,6 +86,10 @@ export default function Preloader({ onComplete }) {
         amount: 0.45,
       },
       ease: "power4.inOut",
+      onStart: () => {
+        window.isPreloaderComplete = true;
+        window.dispatchEvent(new Event("preloaderComplete"));
+      },
     });
 
     return () => {
@@ -88,7 +97,7 @@ export default function Preloader({ onComplete }) {
       clearTimeout(timeoutId);
       initialLoadTimeline.kill();
     };
-  }, [mounted, onComplete]);
+  }, [mounted]);
 
   if (!mounted) return null;
 

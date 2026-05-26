@@ -423,8 +423,6 @@ export default function App() {
         <Preloader
           onComplete={() => {
             setShowPreloader(false);
-            window.isPreloaderComplete = true;
-            window.dispatchEvent(new Event("preloaderComplete"));
           }}
         />
       )}
