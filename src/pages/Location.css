@@ -91,14 +91,26 @@
 
 .location-card__image-wrap {
   overflow: hidden;
-  background: #e4e2e1;
+  background: transparent;
+  aspect-ratio: 4 / 3;
 }
 
 .location-card__image {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
   transition: transform 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.location-card__image-wrap .image-reveal-container,
+.location-card__image-wrap .image-reveal-mask {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.location-card__image-wrap .image-reveal-container {
+  display: block;
 }
 
 .location-card__image-wrap:hover .location-card__image {

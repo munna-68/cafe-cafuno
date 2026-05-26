@@ -204,7 +204,7 @@
 
 .atmosphere-media {
   overflow: hidden;
-  background: #e4e2e1;
+  background: transparent;
 }
 
 .atmosphere-media img {
@@ -212,6 +212,17 @@
   height: 100%;
   object-fit: cover;
   transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.atmosphere-media .image-reveal-container,
+.atmosphere-media .image-reveal-mask {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.atmosphere-media .image-reveal-container {
+  display: block;
 }
 
 .atmosphere-media:hover img {

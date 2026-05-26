@@ -53,12 +53,17 @@ export function usePageAnimations(dependencies = []) {
             : window.getComputedStyle(img).display;
         wrapper.style.position = "relative";
 
-        if (
+        const usesFullFrameReveal =
           img.classList.contains("bento__img--large") ||
-          img.classList.contains("bento__img--small")
-        ) {
+          img.classList.contains("bento__img--small") ||
+          img.closest(
+            ".atmosphere__img-frame, .atmosphere__col-img, .atmosphere-media, .location-card__image-wrap",
+          );
+
+        if (usesFullFrameReveal) {
           wrapper.style.width = "100%";
           wrapper.style.height = "100%";
+          wrapper.style.background = "transparent";
         }
 
         // Inner mask that gets revealed
@@ -67,6 +72,7 @@ export function usePageAnimations(dependencies = []) {
         mask.style.width = "100%";
         mask.style.height = "100%";
         mask.style.position = "relative";
+        mask.style.background = "transparent";
         mask.style.clipPath = "inset(100% 0% 0% 0%)"; // Start fully cropped from bottom
 
         img.parentNode.insertBefore(wrapper, img);
