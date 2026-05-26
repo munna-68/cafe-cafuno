@@ -1,4 +1,13 @@
+import { useState } from "react";
 import "./Footer.css";
+
+function CheckIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 6L9 17l-5-5" />
+    </svg>
+  );
+}
 
 function ArrowIcon() {
   return (
@@ -9,7 +18,29 @@ function ArrowIcon() {
   );
 }
 
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      setError("Enter your email");
+      return;
+    }
+    if (!isValidEmail(email.trim())) {
+      setError("Invalid email address");
+      return;
+    }
+    setError("");
+    setSubmitted(true);
+  };
+
   return (
     <footer className="site-footer">
       <div className="site-footer__shell site-footer__inner">
@@ -38,17 +69,37 @@ export default function Footer() {
 
           <div className="site-footer__updates">
             <span className="site-footer__label">Updates</span>
-            <label className="site-footer__field" htmlFor="email-updates">
-              <span className="sr-only">Email address</span>
-              <input
-                id="email-updates"
-                type="email"
-                placeholder="YOUR EMAIL"
-              />
-              <button type="button" aria-label="Subscribe to updates">
-                <ArrowIcon />
-              </button>
-            </label>
+            {submitted ? (
+              <div className="site-footer__success">
+                <div className="site-footer__success-icon-wrap">
+                  <CheckIcon />
+                </div>
+                <span className="site-footer__success-label">SUBSCRIBED</span>
+                <p className="site-footer__success-desc">
+                  You're on the list. We'll be in touch.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <label className="site-footer__field" htmlFor="email-updates">
+                  <span className="sr-only">Email address</span>
+                  <input
+                    id="email-updates"
+                    type="email"
+                    placeholder="YOUR EMAIL"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (error) setError("");
+                    }}
+                  />
+                  <button type="submit" aria-label="Subscribe to updates">
+                    <ArrowIcon />
+                  </button>
+                </label>
+                {error && <span className="site-footer__error">{error}</span>}
+              </form>
+            )}
           </div>
         </div>
 

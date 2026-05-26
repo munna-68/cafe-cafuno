@@ -85,7 +85,11 @@ export function usePageAnimations(dependencies = []) {
       "h2, h3, h4, p, .bento__item-title, .atmosphere__title, .menu-card__name, .menu-card__desc",
     );
     scrollTexts.forEach((el) => {
-      if (el.closest(".hero, [class$='-header']") || el.closest(".anim-line"))
+      if (
+        el.closest(".hero, [class$='-header']") ||
+        el.closest(".anim-line") ||
+        el.closest(".site-footer")
+      )
         return;
       gsap.set(el, { opacity: 0, y: 30 });
     });
@@ -96,6 +100,7 @@ export function usePageAnimations(dependencies = []) {
 
     // 2. Animation Execution Phase
     const executeAnimations = () => {
+      ScrollTrigger.refresh();
       // 2a. Animate Hero Headings
       const animLines = document.querySelectorAll(
         '.hero .anim-line, [class$="-header"] .anim-line',
@@ -128,7 +133,9 @@ export function usePageAnimations(dependencies = []) {
       ).filter(
         (el) =>
           !(
-            el.closest(".hero, [class$='-header']") || el.closest(".anim-line")
+            el.closest(".hero, [class$='-header']") ||
+            el.closest(".anim-line") ||
+            el.closest(".site-footer")
           ),
       );
 

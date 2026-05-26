@@ -7,6 +7,7 @@ import {
 } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 import Navbar from "./components/Navbar";
 import RouteTransition from "./components/RouteTransition";
@@ -143,12 +144,20 @@ export default function App() {
     }));
   }, []);
 
+  const forceScrollTop = useCallback(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, []);
+
   const completeRouteTransition = useCallback(() => {
+    forceScrollTop();
     transitionBusyRef.current = false;
     pendingRouteRef.current = null;
     setRouteBusy(false);
     document.body.classList.remove("cafuno-is-transitioning");
-  }, []);
+    forceScrollTop();
+  }, [forceScrollTop]);
 
   const navigateWithTransition = useCallback(
     (targetHref) => {
@@ -166,9 +175,12 @@ export default function App() {
         return;
       }
 
+      forceScrollTop();
       transitionBusyRef.current = true;
       pendingRouteRef.current = targetPathKey;
       setRouteBusy(true);
+
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
       const rt = routeTransitionRef.current;
 
@@ -182,13 +194,18 @@ export default function App() {
 
       preloadImages(getRouteMotion(targetUrl.pathname).assets);
 
+      forceScrollTop();
+
       rt.cover({
         onComplete: () => {
-          navigate(`${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`);
+          forceScrollTop();
+          navigate(
+            `${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`,
+          );
         },
       });
     },
-    [navigate],
+    [navigate, forceScrollTop],
   );
 
   useEffect(() => {
@@ -265,6 +282,8 @@ export default function App() {
       pendingRouteRef.current = null;
       activeRouteRef.current = nextRouteKey;
 
+      forceScrollTop();
+
       const rt = routeTransitionRef.current;
       if (rt) {
         setRouteBusy(true);
@@ -280,7 +299,7 @@ export default function App() {
     }
 
     activeRouteRef.current = nextRouteKey;
-  }, [location.pathname, location.search, completeRouteTransition]);
+  }, [location.pathname, location.search, completeRouteTransition, forceScrollTop]);
 
   useEffect(() => {
     const handleClick = (event) => {
