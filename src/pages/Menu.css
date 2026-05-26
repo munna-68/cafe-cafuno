@@ -379,10 +379,10 @@
 
 .menu-modal__desc {
   font-family: "Manrope", sans-serif;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 300;
   color: #49463f;
-  line-height: 1.6;
+  line-height: 1.4;
 }
 
 .menu-modal__price {
