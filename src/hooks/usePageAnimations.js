@@ -185,6 +185,49 @@ export function usePageAnimations(dependencies = []) {
           });
         },
       });
+
+      // 2d. CTA Hover Animation setup
+      const ctaButtons = document.querySelectorAll(".cta-hover-effect");
+      ctaButtons.forEach((btn) => {
+        const bg = btn.querySelector(".cta-hover-bg");
+
+        // Set up the hover animation timeline
+        const hoverTl = gsap.timeline({ paused: true });
+
+        hoverTl
+          .to(bg, {
+            y: "0%",
+            duration: 0.4,
+            ease: "circ.inOut",
+          })
+          .to(
+            btn,
+            {
+              color: "#1b1c1c",
+              borderColor: "#1b1c1c",
+              duration: 0.2,
+            },
+            "<0.1",
+          );
+
+        // Desktop hover events using vanilla JS event listeners
+        const playHover = () => hoverTl.play();
+        const reverseHover = () => hoverTl.reverse();
+
+        btn.addEventListener("mouseenter", playHover);
+        btn.addEventListener("mouseleave", reverseHover);
+        btn.addEventListener("focus", playHover);
+        btn.addEventListener("blur", reverseHover);
+
+        // Clean up data attributes for re-entry logic if needed
+        btn._gsapHoverCleanup = () => {
+          btn.removeEventListener("mouseenter", playHover);
+          btn.removeEventListener("mouseleave", reverseHover);
+          btn.removeEventListener("focus", playHover);
+          btn.removeEventListener("blur", reverseHover);
+          hoverTl.kill();
+        };
+      });
     };
 
     if (window.isPreloaderComplete) {
@@ -204,6 +247,11 @@ export function usePageAnimations(dependencies = []) {
     return () => {
       clearTimeout(timeoutId);
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+
+      const ctaButtons = document.querySelectorAll(".cta-hover-effect");
+      ctaButtons.forEach((btn) => {
+        if (btn._gsapHoverCleanup) btn._gsapHoverCleanup();
+      });
     };
   }, [location.pathname, ...dependencies]);
 }

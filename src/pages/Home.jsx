@@ -112,7 +112,11 @@ export default function Home() {
             </div>
 
             {/* CTA — bottom right */}
-            <a href="/menu" className="bento__item bento__item--cta">
+            <a
+              href="/menu"
+              className="bento__item bento__item--cta cta-hover-effect"
+            >
+              <div className="cta-hover-bg"></div>
               <span className="bento__cta-text">Explore Full Menu</span>
               <svg
                 className="bento__cta-icon"
@@ -123,7 +127,7 @@ export default function Home() {
               >
                 <path
                   d="M18.2625 13.5l-18.2625 0 0-3 18.2625 0-8.4-8.4 2.1375-2.1 12 12-12 12-2.1375-2.1 8.4-8.4 0 0"
-                  fill="#fcf9f8"
+                  fill="currentColor"
                 />
               </svg>
             </a>
